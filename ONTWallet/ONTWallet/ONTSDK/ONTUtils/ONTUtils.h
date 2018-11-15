@@ -55,5 +55,6 @@
 
 + (NSString *)decimalNumber:(NSString *)number byDividingBy:(NSString *)divideNumber;
 + (NSString *)decimalNumber:(NSString *)number byMultiplyingBy:(NSString *)multiplyNumber;
++ (NSString *)decimalNumberWithHexString:(NSString *)numberHexString;
 
 @end

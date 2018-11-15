@@ -86,4 +86,14 @@
     return result.stringValue;
 }
 
++ (NSString *)decimalNumberWithHexString:(NSString *)numberHexString {
+    if (![numberHexString hasPrefix:@"0x"]) {
+        numberHexString = [@"0x" stringByAppendingString:numberHexString];
+    }
+    NSScanner* scanner = [NSScanner scannerWithString:numberHexString];
+    unsigned long long number;
+    [scanner scanHexLongLong:&number];
+    return [[NSNumber numberWithUnsignedLongLong:number] stringValue];
+}
+
 @end

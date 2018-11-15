@@ -10,8 +10,12 @@
 #define ONT_h
 
 #define kONTMainNet NO  // MainNet or TestNet
-#define kONTRpcURL kONTMainNet?@"http://dappnode1.ont.io:20336":@"http://polaris1.ont.io:20336"
-#define kONTRestfulURL kONTMainNet?@"http://dappnode1.ont.io:20334":@"http://polaris1.ont.io:20334"
+//#define kONTRpcURL kONTMainNet?@"http://dappnode1.ont.io:20336":@"http://polaris1.ont.io:20336"
+//#define kONTRestfulURL kONTMainNet?@"http://dappnode1.ont.io:20334":@"http://polaris1.ont.io:20334"
+
+#define kONTRpcURL @"http://192.168.2.176:20336"
+#define kONTRestfulURL @"http://192.168.2.176:20334"
+
 
 #define kONTScanTxURL(hash) kONTMainNet?[NSString stringWithFormat:@"https://explorer.ont.io/transaction/%@",hash]:[NSString stringWithFormat:@"https://explorer.ont.io/transaction/%@/testnet",hash]
 #define kONTExplorerBaseURL(version) kONTMainNet?[NSString stringWithFormat:@"https://explorer.ont.io/api/v%@/explorer",version]:[NSString stringWithFormat:@"https://polarisexplorer.ont.io/api/v%@/explorer",version]

@@ -10,6 +10,7 @@
 #import "NSMutableData+Extend.h"
 #import "NSData+Hash.h"
 #import "NSData+Extend.h"
+#import "ONTAddress.h"
 
 @implementation ONTTransaction
 /**
@@ -20,6 +21,10 @@
     if (self) {
         _type = type;
         _version = 0;
+        _nonce = arc4random_uniform(INT_MAX);
+        _gasLimit = 0;
+        _gasLimit = 0;
+        _payer = [ONTAddress new];
         _attributes = [NSMutableArray new];
         _signatures = [NSMutableArray new];
     }

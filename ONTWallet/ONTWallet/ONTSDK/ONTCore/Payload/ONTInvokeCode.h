@@ -14,4 +14,6 @@
 
 + (ONTTransaction *)invokeCodeTransaction:(ONTAddress *)codeAddress initMethod:(NSString *)initMethod args:(NSData *)args payer:(ONTAddress *)payer gasLimit:(long)gasLimit gasPrice:(long)gasPrice;
 
++ (ONTTransaction *)invokeNeoCodeTransaction:(ONTAddress *)codeAddress initMethod:(NSString *)initMethod args:(NSData *)args payer:(ONTAddress *)payer gasLimit:(long)gasLimit gasPrice:(long)gasPrice;
+
 @end
