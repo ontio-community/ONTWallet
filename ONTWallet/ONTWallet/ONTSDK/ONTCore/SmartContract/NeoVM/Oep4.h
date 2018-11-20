@@ -12,6 +12,7 @@
 #import <Foundation/Foundation.h>
 
 @class NeoVM;
+@class ONTAccount;
 
 @interface Oep4 : NSObject
 
@@ -21,7 +22,17 @@
 
 - (void)queryBalanceOf:(NSString*)address
               queryCallback:(void (^)(NSString *balance, NSError *error))callback;
-//- (NSString*)sendTransfer:
+
+- (void)queryDecimalsWithQueryCallback:(void (^)(NSString *val, NSError *error))callback;
+
+- (void)sendTransfer:(ONTAccount*)from
+                  to:(NSString*)to
+          withAmount:(long)amount
+          byGasPayer:(ONTAccount*)payer
+         useGasLimit:(long)gaslimit
+         useGasPrice:(long)gasprice
+             preExec:(BOOL)isPreExec
+       queryCallback:(void (^)(id result, NSError *error))callback;
 
 @end
 

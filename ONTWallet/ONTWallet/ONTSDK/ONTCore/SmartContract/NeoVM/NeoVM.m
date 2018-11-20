@@ -53,20 +53,22 @@ static NeoVM *_instance = nil;
         p = [[NSData alloc] init];
     }
     
-    if (preExec) {
-        ONTTransaction* tx = [ONTInvokeCode invokeNeoCodeTransaction:contract initMethod:nil args:p payer:nil gasLimit:0 gasPrice:0];
-        
-        if (sender) {
-            ONTECKey *ecKey = [[ONTECKey alloc] initWithPriKey:sender.privateKey.data];
-            ECKeySignature *sign = [ecKey sign:tx.getSignHash];
-            [tx.signatures addObject:[[ONTSignature alloc] initWithPublicKey:ecKey.publicKeyAsData signature:sign.toDataNoV]];
-        }
-        NSString *txHex = tx.toRawByte.hexString;
-        [[ONTRpcApi shareInstance] sendRawtransactionWithHexTx:txHex preExec:YES callback:callback];
+    ONTTransaction* tx = [ONTInvokeCode invokeNeoCodeTransaction:contract
+                                                      initMethod:nil
+                                                            args:p
+                                                           payer:preExec ? nil : payer.address
+                                                        gasLimit:preExec ? 0 : gaslimit
+                                                        gasPrice:preExec ? 0 : gasprice];
 
-    } else {
-        
+    if (sender) {
+        [tx addSign:sender];
+        if ([sender isEqualToAccount:payer]) {
+            [tx addSign:payer];
+        }
     }
+
+    NSString *txHex = tx.toRawByte.hexString;
+    [[ONTRpcApi shareInstance] sendRawtransactionWithHexTx:txHex preExec:preExec callback:callback];
 }
 
 @end

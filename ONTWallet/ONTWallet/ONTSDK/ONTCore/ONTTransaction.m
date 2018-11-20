@@ -11,6 +11,9 @@
 #import "NSData+Hash.h"
 #import "NSData+Extend.h"
 #import "ONTAddress.h"
+#import "ONTECKey.h"
+#import "ONTAccount.h"
+
 
 @implementation ONTTransaction
 /**
@@ -70,4 +73,10 @@
 - (NSData*)getSignHash {
     return [self toByte].SHA256_2;
 }
+- (void)addSign:(ONTAccount *)signer {
+    ONTECKey *ecKey = [[ONTECKey alloc] initWithPriKey:signer.privateKey.data];
+    ECKeySignature *sign = [ecKey sign:self.getSignHash];
+    [self.signatures addObject:[[ONTSignature alloc] initWithPublicKey:ecKey.publicKeyAsData signature:sign.toDataNoV]];
+}
+
 @end

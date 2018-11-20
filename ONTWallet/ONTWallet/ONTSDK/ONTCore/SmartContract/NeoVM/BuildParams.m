@@ -26,6 +26,8 @@
     for (Parameter* param in fun.parameters) {
         if ([@"ByteArray" isEqualToString:param.type]) {
             [tmp addObject: param.value];
+        } else if ([@"Integer" isEqualToString:param.type]) {
+            [tmp addObject: param.value];
         }
     }
     
@@ -45,9 +47,11 @@
         }else if ([val isKindOfClass:ONTBool.class]){
             [data pushBool:((ONTBool *)val).value];
         }else if ([val isKindOfClass:ONTInteger.class]){
-            [data pushNumber:@(((ONTInteger *)val).value)];
+            uint64_t v = CFSwapInt64HostToLittle(((ONTInteger *)val).value);
+            [data pushData:[NSData dataWithBytes:&v length:sizeof(v)]];
         }else if ([val isKindOfClass:ONTLong.class]){
-            [data pushNumber:@(((ONTLong *)val).value)];
+            uint64_t v = CFSwapInt64HostToLittle(((ONTLong *)val).value);
+            [data pushData:[NSData dataWithBytes:&v length:sizeof(v)]];
         }else if ([val isKindOfClass:ONTAddress.class]){
             [data pushData:((ONTAddress *)val).publicKeyHash160];
         }else if ([val isKindOfClass:NSString.class]){
