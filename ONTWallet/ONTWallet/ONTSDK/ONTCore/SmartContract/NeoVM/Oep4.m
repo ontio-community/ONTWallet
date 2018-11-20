@@ -30,6 +30,33 @@
     return self;
 }
 
+- (void)setContractAddress:(NSString *)contractAddress {
+    _contractAddress = contractAddress;
+    
+    // need reverse
+    _contractAddressOnt = [[ONTAddress alloc] initWithData:[[_contractAddress hexToData] reverse]];
+}
+
+- (void)sendInit:(ONTAccount*)acct
+      byGasPayer:(ONTAccount*)payer
+     useGasLimit:(long)gaslimit
+     useGasPrice:(long)gasprice
+         preExec:(BOOL)isPreExec
+   queryCallback:(void (^)(id result, NSError *error))callback {
+    AbiFunction* func = [[AbiFunction alloc] init];
+    func.name = @"init";
+    func.returntype = @"Boolean";
+    
+    [_vm sendTransactionWithContract:_contractAddressOnt
+                            bySender:acct
+                             byPayer:payer
+                         payGasLimit:gaslimit
+                         payGasPrice:gasprice
+                           withParam:func
+                           isPreExec:isPreExec
+                            callback:callback];
+}
+
 - (void)queryBalanceOf:(NSString*)address
               queryCallback:(void (^)(NSString *balance, NSError *error))callback {
     ONTAddress* addr = [[ONTAddress alloc] initWithAddressString:address];
@@ -67,13 +94,6 @@
     
 }
 
-- (void)setContractAddress:(NSString *)contractAddress {
-    _contractAddress = contractAddress;
-    
-    // need reverse
-    _contractAddressOnt = [[ONTAddress alloc] initWithData:[[_contractAddress hexToData] reverse]];
-}
-
 - (void)queryDecimalsWithQueryCallback:(void (^)(NSString *val, NSError *error))callback {
     AbiFunction* func = [[AbiFunction alloc] init];
     func.name = @"decimals";
@@ -99,6 +119,70 @@
                                 }
                             }];
 
+}
+
+- (void)queryTotalSupply:(void (^)(NSString *val, NSError *error))callback {
+    AbiFunction* func = [[AbiFunction alloc] init];
+    func.name = @"totalSupply";
+    func.returntype = @"Integer";
+    
+    [_vm sendTransactionWithContract:_contractAddressOnt
+                            bySender:nil
+                             byPayer:nil
+                         payGasLimit:0
+                         payGasPrice:0
+                           withParam:func
+                           isPreExec:YES
+                            callback:^(id result, NSError *error) {
+                                if (error) {
+                                    callback(@"0", error);
+                                } else {
+                                    NSString* rlt = [(NSDictionary*)result objectForKey:@"Result"];
+                                    if ([@"" isEqualToString:rlt]) {
+                                        rlt = @"0";
+                                    }
+                                    
+                                    rlt = [ONTUtils decimalNumberWithHexString:[NSString hexWithData:[[rlt hexToData] reverse]]];
+                                    
+                                    callback(rlt, nil);
+                                }
+                            }];
+}
+
+- (void)queryParam:(NSString*)funcName ReturnedString:(void (^)(NSString *val, NSError *error))callback {
+    AbiFunction* func = [[AbiFunction alloc] init];
+    func.name = funcName;
+    func.returntype = @"String";
+    
+    [_vm sendTransactionWithContract:_contractAddressOnt
+                            bySender:nil
+                             byPayer:nil
+                         payGasLimit:0
+                         payGasPrice:0
+                           withParam:func
+                           isPreExec:YES
+                            callback:^(id result, NSError *error) {
+                                if (error) {
+                                    callback(@"0", error);
+                                } else {
+                                    NSString* rlt = [(NSDictionary*)result objectForKey:@"Result"];
+                                    if ([@"" isEqualToString:rlt]) {
+                                        rlt = @"0";
+                                    }
+                                    
+                                    rlt = [[NSString alloc] initWithData:[rlt hexToData] encoding:NSASCIIStringEncoding];
+                                    
+                                    callback(rlt, nil);
+                                }
+                            }];
+}
+
+- (void)queryName:(void (^)(NSString *val, NSError *error))callback {
+    [self queryParam:@"name" ReturnedString:callback];
+}
+
+- (void)querySymbol:(void (^)(NSString *val, NSError *error))callback {
+    [self queryParam:@"symbol" ReturnedString:callback];
 }
 
 - (void)sendTransfer:(ONTAccount*)from

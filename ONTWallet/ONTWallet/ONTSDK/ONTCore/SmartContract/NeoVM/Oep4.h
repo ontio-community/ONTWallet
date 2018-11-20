@@ -20,10 +20,19 @@
 
 - (instancetype)initWithVM:(NeoVM*)vm;
 
+- (void)sendInit:(ONTAccount*)acct
+          byGasPayer:(ONTAccount*)payer
+         useGasLimit:(long)gaslimit
+         useGasPrice:(long)gasprice
+             preExec:(BOOL)isPreExec
+       queryCallback:(void (^)(id result, NSError *error))callback;
+
 - (void)queryBalanceOf:(NSString*)address
               queryCallback:(void (^)(NSString *balance, NSError *error))callback;
-
 - (void)queryDecimalsWithQueryCallback:(void (^)(NSString *val, NSError *error))callback;
+- (void)queryTotalSupply:(void (^)(NSString *val, NSError *error))callback;
+- (void)queryName:(void (^)(NSString *val, NSError *error))callback;
+- (void)querySymbol:(void (^)(NSString *val, NSError *error))callback;
 
 - (void)sendTransfer:(ONTAccount*)from
                   to:(NSString*)to
