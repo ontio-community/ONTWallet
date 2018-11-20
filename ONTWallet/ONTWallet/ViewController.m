@@ -30,9 +30,13 @@
     
 //    [self testOep4Init];
 //    [self testSendOep4];
-//    [self testOep4QueryBalanceOf];
+    [self testOep4QueryBalanceOf];
 //    [self testOep4QueryDecimals];
-    [self testOep4Queries];
+//    [self testOep4Queries];
+    
+//    [self testOep4Approve];
+//    [self testOep4SendTransferFrom];
+//    [self testOep4QueryAllowance];
     
     // GET Get Best Block Hash
     //[self testGetBestBlockHash];
@@ -115,7 +119,17 @@
 }
 
 - (void)testCreateNewWallet {
+    // acct1
+    // L44EwAY5X8afopnLxbytoU9KGH9pCZP37WxrvnDgvMkei9wrBfUe
+    // AUvfyDwjEeCrBZWYTakazA9hQVQnaxYX46
+    
+    // acct2
+    // L5YLmKhPooKXgE81dRdiqqnBFUSXdsv34DmStex1Xu8fDtyAJ4Bj
+    // AUwN8rcsEK4TkiYZFCdcjdxChx2aEHG3DN
+    
     ONTAccount *account = [[ONTAccount alloc] initWithName:@"ONT-Wallet" password:@"ONT123ont"];
+    NSLog(@"=== 【ONTAccount】=== wif:%@", [account.privateKey toWif]);
+    NSLog(@"=== 【ONTAccount】=== address:%@", account.address.address);
     NSLog(@"=== 【ONTAccount】=== \n%@", account.description);
     NSLog(@"=== 【ONTAccount】=== \n%@", account.encryptMnemonicText);
     NSString *mnemonicText = [ONTMnemonicCode decryptMnemonicCode:account.encryptMnemonicText password:@"ONT123ont" address:account.address.address];
@@ -214,7 +228,9 @@
 - (void)testOep4QueryBalanceOf {
     [NeoVM shareInstance].oep4.contractAddress = @"7b236dcf51b1004f6cce63ade53d5d61680a7442";
     
-    [[NeoVM shareInstance].oep4 queryBalanceOf:@"Ae67o5x6TUau9ctxSFAvicMEwEvLe6P93S" queryCallback:^(NSString *balance, NSError *error) {
+    // AUwN8rcsEK4TkiYZFCdcjdxChx2aEHG3DN
+    // Ae67o5x6TUau9ctxSFAvicMEwEvLe6P93S
+    [[NeoVM shareInstance].oep4 queryBalanceOf:@"AUwN8rcsEK4TkiYZFCdcjdxChx2aEHG3DN" queryCallback:^(NSString *balance, NSError *error) {
         NSLog(@"balance == %@, %@", balance, [error localizedDescription]);
     }];
 }
@@ -293,6 +309,72 @@
                                        [self testOep4QueryBalanceOf];
                                    }
                                }];
+}
+
+- (void)testOep4Approve {
+    [NeoVM shareInstance].oep4.contractAddress = @"7b236dcf51b1004f6cce63ade53d5d61680a7442";
+    
+    ONTAccount *owner = [[ONTAccount alloc] initWithName:@"ONT-Wallet" password:@"ONT1234567890" wif:@"L2pGnv7waHczPursyuGDCBBU6GuoVBHkKF6uKjeFfiy584LQUqir"];
+    
+    NSLog(@"from address:%@", owner.address.address);
+    
+    BOOL isPreExec = NO;
+    [[NeoVM shareInstance].oep4 sendApprove:owner
+                                  toSpender:@"AUvfyDwjEeCrBZWYTakazA9hQVQnaxYX46"
+                                 withAmount:100000000
+                                 byGasPayer:owner
+                                useGasLimit:20000
+                                useGasPrice:500
+                                    preExec:isPreExec
+                              queryCallback:^(id result, NSError *error) {
+                                   if (isPreExec) {
+                                       NSString* gasConsumed = [(NSDictionary*)result objectForKey:@"Gas"];
+                                       NSLog(@"\nGas == %@", result);
+                                   } else {
+                                       NSString* txhash = (NSString*)result;
+                                       NSLog(@"\ntxhash == %@", txhash);
+                                       [self testOep4QueryAllowance];
+                                   }
+                               }];
+}
+
+- (void)testOep4SendTransferFrom {
+    [NeoVM shareInstance].oep4.contractAddress = @"7b236dcf51b1004f6cce63ade53d5d61680a7442";
+    
+    ONTAccount *sender = [[ONTAccount alloc] initWithName:@"ONT-Wallet" password:@"ONT123ont" wif:@"L44EwAY5X8afopnLxbytoU9KGH9pCZP37WxrvnDgvMkei9wrBfUe"];
+    
+    NSLog(@"from address:%@", sender.address.address);
+    
+    BOOL isPreExec = NO;
+    [[NeoVM shareInstance].oep4 sendTransferFrom:sender
+                                            from:@"Ae67o5x6TUau9ctxSFAvicMEwEvLe6P93S"
+                                              to:@"AUwN8rcsEK4TkiYZFCdcjdxChx2aEHG3DN"
+                                      withAmount:10000000
+                                      byGasPayer:sender
+                                     useGasLimit:20000
+                                     useGasPrice:500
+                                         preExec:isPreExec
+                                   queryCallback:^(id result, NSError *error) {
+        if (isPreExec) {
+            NSString* gasConsumed = [(NSDictionary*)result objectForKey:@"Gas"];
+            NSLog(@"\nGas == %@", result);
+        } else {
+            NSString* txhash = (NSString*)result;
+            NSLog(@"\ntxhash == %@", txhash);
+            [self testOep4QueryAllowance];
+        }
+    }];
+}
+
+- (void)testOep4QueryAllowance {
+    [NeoVM shareInstance].oep4.contractAddress = @"7b236dcf51b1004f6cce63ade53d5d61680a7442";
+    
+    [[NeoVM shareInstance].oep4 queryAllowance:@"Ae67o5x6TUau9ctxSFAvicMEwEvLe6P93S"
+                                   withSpender:@"AUvfyDwjEeCrBZWYTakazA9hQVQnaxYX46"
+                                 queryCallback:^(NSString *balance, NSError *error) {
+        NSLog(@"balance == %@, %@", balance, [error localizedDescription]);
+    }];
+
 }
 
 - (void)testSendONG {

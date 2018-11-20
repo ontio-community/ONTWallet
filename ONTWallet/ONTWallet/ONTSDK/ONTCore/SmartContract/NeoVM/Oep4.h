@@ -43,6 +43,29 @@
              preExec:(BOOL)isPreExec
        queryCallback:(void (^)(id result, NSError *error))callback;
 
+- (void)sendApprove:(ONTAccount*)owner
+          toSpender:(NSString*)spender
+          withAmount:(long)amount
+          byGasPayer:(ONTAccount*)payer
+         useGasLimit:(long)gaslimit
+         useGasPrice:(long)gasprice
+             preExec:(BOOL)isPreExec
+       queryCallback:(void (^)(id result, NSError *error))callback;
+
+- (void)sendTransferFrom:(ONTAccount*)sender
+                    from:(NSString*)from
+                      to:(NSString*)to
+              withAmount:(long)amount
+              byGasPayer:(ONTAccount*)payer
+             useGasLimit:(long)gaslimit
+             useGasPrice:(long)gasprice
+                 preExec:(BOOL)isPreExec
+           queryCallback:(void (^)(id result, NSError *error))callback;
+
+- (void)queryAllowance:(NSString*)owner
+           withSpender:(NSString*)spender
+         queryCallback:(void (^)(NSString *balance, NSError *error))callback;
+
 @end
 
 #endif /* Oep4_h */
