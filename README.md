@@ -82,3 +82,16 @@ NSLog(@"txHash == %@,error:%@",txHash, error);
     }
 }];
 ```
+
+#### OEP4 support
+```
+- (void)testOep4QueryBalanceOf {
+    [NeoVM shareInstance].oep4.contractAddress = @"7b236dcf51b1004f6cce63ade53d5d61680a7442";
+    
+    // AUwN8rcsEK4TkiYZFCdcjdxChx2aEHG3DN
+    // Ae67o5x6TUau9ctxSFAvicMEwEvLe6P93S
+    [[NeoVM shareInstance].oep4 queryBalanceOf:@"AUwN8rcsEK4TkiYZFCdcjdxChx2aEHG3DN" queryCallback:^(NSString *balance, NSError *error) {
+        NSLog(@"balance == %@, %@", balance, [error localizedDescription]);
+    }];
+}
+```
