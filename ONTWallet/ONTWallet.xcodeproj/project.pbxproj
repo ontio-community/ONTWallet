@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -77,6 +77,11 @@
 		73B1C4AE2115FDD5002FDFF2 /* ONTRestfulApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 73B1C4AD2115FDD5002FDFF2 /* ONTRestfulApi.m */; };
 		73B1C4B12116006E002FDFF2 /* ONTNetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 73B1C4B02116006E002FDFF2 /* ONTNetworkService.m */; };
 		7BE6E887FA43E93BBBABFDDE /* libPods-ONTWallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB9CF875B66657AC2E4D93F9 /* libPods-ONTWallet.a */; };
+		843B7806219BD53700F9EAF0 /* AbiFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 843B7805219BD53700F9EAF0 /* AbiFunction.m */; };
+		843B7809219BD56E00F9EAF0 /* Parameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 843B7808219BD56E00F9EAF0 /* Parameter.m */; };
+		84763756219BCDDD00A31959 /* Oep4.m in Sources */ = {isa = PBXBuildFile; fileRef = 84763754219BCC1900A31959 /* Oep4.m */; };
+		84B0CAA3219C1B2100B9E2DD /* BuildParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B0CAA2219C1B2100B9E2DD /* BuildParams.m */; };
+		84B72823219C2CEB004B116A /* NeoVM.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B72822219C2CEB004B116A /* NeoVM.m */; };
 		DF83CC2B26D8D6B1F96B032B /* libPods-ONTWalletUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA427CD66D7CCC78FA3219A3 /* libPods-ONTWalletUITests.a */; };
 /* End PBXBuildFile section */
 
@@ -279,6 +284,16 @@
 		73B1C4AD2115FDD5002FDFF2 /* ONTRestfulApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ONTRestfulApi.m; sourceTree = "<group>"; };
 		73B1C4AF2116006E002FDFF2 /* ONTNetworkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ONTNetworkService.h; sourceTree = "<group>"; };
 		73B1C4B02116006E002FDFF2 /* ONTNetworkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ONTNetworkService.m; sourceTree = "<group>"; };
+		843B7804219BD53700F9EAF0 /* AbiFunction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AbiFunction.h; sourceTree = "<group>"; };
+		843B7805219BD53700F9EAF0 /* AbiFunction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AbiFunction.m; sourceTree = "<group>"; };
+		843B7807219BD56E00F9EAF0 /* Parameter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Parameter.h; sourceTree = "<group>"; };
+		843B7808219BD56E00F9EAF0 /* Parameter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Parameter.m; sourceTree = "<group>"; };
+		84763754219BCC1900A31959 /* Oep4.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Oep4.m; sourceTree = "<group>"; };
+		84763755219BCC1900A31959 /* Oep4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Oep4.h; sourceTree = "<group>"; };
+		84B0CAA1219C1B2100B9E2DD /* BuildParams.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuildParams.h; sourceTree = "<group>"; };
+		84B0CAA2219C1B2100B9E2DD /* BuildParams.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuildParams.m; sourceTree = "<group>"; };
+		84B72821219C2CEB004B116A /* NeoVM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NeoVM.h; sourceTree = "<group>"; };
+		84B72822219C2CEB004B116A /* NeoVM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NeoVM.m; sourceTree = "<group>"; };
 		C554FFA8220B7C411316F73D /* Pods-ONTWalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ONTWalletTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ONTWalletTests/Pods-ONTWalletTests.release.xcconfig"; sourceTree = "<group>"; };
 		CB9CF875B66657AC2E4D93F9 /* libPods-ONTWallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ONTWallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E11E61A23B1FC93A6B8DCC23 /* libPods-ONTWalletTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ONTWalletTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -487,6 +502,7 @@
 		734714A721154BF400ADD665 /* SmartContract */ = {
 			isa = PBXGroup;
 			children = (
+				84763753219BCC1900A31959 /* NeoVM */,
 				734714A921154BF400ADD665 /* ONTBool.h */,
 				734714AD21154BF400ADD665 /* ONTBool.m */,
 				734714B021154BF400ADD665 /* ONTInteger.h */,
@@ -670,6 +686,23 @@
 			path = ONTUtils;
 			sourceTree = "<group>";
 		};
+		84763753219BCC1900A31959 /* NeoVM */ = {
+			isa = PBXGroup;
+			children = (
+				84763754219BCC1900A31959 /* Oep4.m */,
+				84763755219BCC1900A31959 /* Oep4.h */,
+				84B0CAA1219C1B2100B9E2DD /* BuildParams.h */,
+				84B0CAA2219C1B2100B9E2DD /* BuildParams.m */,
+				843B7804219BD53700F9EAF0 /* AbiFunction.h */,
+				843B7805219BD53700F9EAF0 /* AbiFunction.m */,
+				843B7807219BD56E00F9EAF0 /* Parameter.h */,
+				843B7808219BD56E00F9EAF0 /* Parameter.m */,
+				84B72821219C2CEB004B116A /* NeoVM.h */,
+				84B72822219C2CEB004B116A /* NeoVM.m */,
+			);
+			path = NeoVM;
+			sourceTree = "<group>";
+		};
 		91841FDC4A836373E9CFD186 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -753,19 +786,22 @@
 				TargetAttributes = {
 					731EB0A720F8447000A1C4D0 = {
 						CreatedOnToolsVersion = 9.4.1;
+						ProvisioningStyle = Automatic;
 					};
 					731EB0BF20F8447300A1C4D0 = {
 						CreatedOnToolsVersion = 9.4.1;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 731EB0A720F8447000A1C4D0;
 					};
 					731EB0CA20F8447300A1C4D0 = {
 						CreatedOnToolsVersion = 9.4.1;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 731EB0A720F8447000A1C4D0;
 					};
 				};
 			};
 			buildConfigurationList = 731EB0A320F8447000A1C4D0 /* Build configuration list for PBXProject "ONTWallet" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -874,13 +910,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84763756219BCDDD00A31959 /* Oep4.m in Sources */,
 				734714CE21154BF400ADD665 /* NSMutableData+ONTScriptBuilder.m in Sources */,
 				734714D121154BF400ADD665 /* ONTDeterministicKey.m in Sources */,
 				734714C921154BF400ADD665 /* ONTTransaction.m in Sources */,
 				734714D321154BF400ADD665 /* ONTInteger.m in Sources */,
 				734714D421154BF400ADD665 /* ONTStruct.m in Sources */,
 				734714CB21154BF400ADD665 /* ONTInvokeCode.m in Sources */,
+				843B7809219BD56E00F9EAF0 /* Parameter.m in Sources */,
 				73B1C4AE2115FDD5002FDFF2 /* ONTRestfulApi.m in Sources */,
+				84B0CAA3219C1B2100B9E2DD /* BuildParams.m in Sources */,
 				7347154F21154CA300ADD665 /* ripemd160.c in Sources */,
 				7347155421154CA300ADD665 /* scrypt_sha256.c in Sources */,
 				7347154021154CA300ADD665 /* bip39.c in Sources */,
@@ -931,8 +970,10 @@
 				7347155921154CA300ADD665 /* ecdsa.c in Sources */,
 				7347155A21154CA300ADD665 /* pbkdf2.c in Sources */,
 				734714C621154BF400ADD665 /* ECKeySignature.m in Sources */,
+				843B7806219BD53700F9EAF0 /* AbiFunction.m in Sources */,
 				734714DC21154BF400ADD665 /* ONTAccount.m in Sources */,
 				734714C521154BF400ADD665 /* DeterministicKey.m in Sources */,
+				84B72823219C2CEB004B116A /* NeoVM.m in Sources */,
 				7347155321154CA300ADD665 /* secp256k1_zkp.c in Sources */,
 				734714D821154BF400ADD665 /* NSString+Base58.m in Sources */,
 			);
@@ -1123,10 +1164,8 @@
 					"\"$(SRCROOT)/ONTWallet/ONTSDK/ONTCore/ONT.h\"",
 				);
 				INFOPLIST_FILE = ONTWallet/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.medishares.ONTWallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1157,10 +1196,8 @@
 					"\"$(SRCROOT)/ONTWallet/ONTSDK/ONTCore/ONT.h\"",
 				);
 				INFOPLIST_FILE = ONTWallet/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.medishares.ONTWallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1174,11 +1211,8 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ONTWalletTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.medishares.ONTWalletTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1193,11 +1227,8 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ONTWalletTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.medishares.ONTWalletTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1211,11 +1242,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ONTWalletUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.medishares.ONTWalletUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1229,11 +1256,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ONTWalletUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.medishares.ONTWalletUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

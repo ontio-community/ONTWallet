@@ -39,6 +39,25 @@
 
     return invokeCode;
 }
+
++ (ONTTransaction *)invokeNeoCodeTransaction:(ONTAddress *)codeAddress initMethod:(NSString *)initMethod args:(NSData *)args payer:(ONTAddress *)payer gasLimit:(long)gasLimit gasPrice:(long)gasPrice {
+    NSMutableData *data = [NSMutableData new];
+    
+    [data addData:args];
+    [data addByte:(Byte)0x67];
+    [data addData:codeAddress.publicKeyHash160];
+    
+    ONTInvokeCode *invokeCode = [[ONTInvokeCode alloc] init];
+    invokeCode.nonce = arc4random_uniform(INT_MAX);
+    invokeCode.gasLimit = gasLimit;
+    invokeCode.gasPrice = gasPrice;
+    invokeCode.code = data;
+    if (payer) {
+        invokeCode.payer = payer;
+    }
+    return invokeCode;
+}
+
 /**
  * @brief Obtaining Exclusive byte stream data
  */

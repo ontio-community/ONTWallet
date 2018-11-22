@@ -11,6 +11,8 @@
 #import "ONTAttribute.h"
 #import "ONTSignature.h"
 
+@class ONTAccount;
+
 typedef NS_OPTIONS(NSInteger, ONTTransactionType){
     ONTTransactionTypeBookkeeping = 0x00,
     ONTTransactionTypeBookkeeper = 0x02,
@@ -49,4 +51,6 @@ typedef NS_OPTIONS(NSInteger, ONTTransactionType){
 - (void)toExclusiveByte:(NSMutableData *)stream;
 
 - (NSData*)getSignHash;
+
+- (void)addSign:(ONTAccount*)signer;
 @end

@@ -359,4 +359,15 @@
     return [NSString stringWithFormat:@"【name】== %@\n【mnemonicText】== %@\n【encryptMnemonicText】== %@\n【privateKeyHex】== %@\n【wif】== %@\n【keystore】== %@\n【address】== %@", self.name, self.mnemonicText, self.encryptMnemonicText, self.privateKeyHex, self.wif, self.keystore, self.address.address];
 }
 
+- (BOOL)isEqualToAccount:(ONTAccount*)other {
+    if (self == other) {
+        return YES;
+    }
+    
+    if (!other || ![other isKindOfClass:[self class]]) {
+        return NO;
+    }
+    
+    return [self.address.publicKeyHash160 isEqualToData:other.address.publicKeyHash160];
+}
 @end

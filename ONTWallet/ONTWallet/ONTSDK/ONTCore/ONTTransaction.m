@@ -10,6 +10,10 @@
 #import "NSMutableData+Extend.h"
 #import "NSData+Hash.h"
 #import "NSData+Extend.h"
+#import "ONTAddress.h"
+#import "ONTECKey.h"
+#import "ONTAccount.h"
+
 
 @implementation ONTTransaction
 /**
@@ -20,6 +24,10 @@
     if (self) {
         _type = type;
         _version = 0;
+        _nonce = arc4random_uniform(INT_MAX);
+        _gasLimit = 0;
+        _gasLimit = 0;
+        _payer = [ONTAddress new];
         _attributes = [NSMutableArray new];
         _signatures = [NSMutableArray new];
     }
@@ -65,4 +73,10 @@
 - (NSData*)getSignHash {
     return [self toByte].SHA256_2;
 }
+- (void)addSign:(ONTAccount *)signer {
+    ONTECKey *ecKey = [[ONTECKey alloc] initWithPriKey:signer.privateKey.data];
+    ECKeySignature *sign = [ecKey sign:self.getSignHash];
+    [self.signatures addObject:[[ONTSignature alloc] initWithPublicKey:ecKey.publicKeyAsData signature:sign.toDataNoV]];
+}
+
 @end

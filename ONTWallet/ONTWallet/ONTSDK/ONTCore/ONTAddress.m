@@ -11,6 +11,15 @@
 #import "NSMutableData+ONTScriptBuilder.h"
 
 @implementation ONTAddress
+
+- (instancetype)init{
+    self = [super init];
+    if (self) {
+        _address = nil;
+        _publicKeyHash160 = [NSMutableData dataWithLength:20];
+    }
+    return self;
+}
 /**
  * @brief Initialization method
  */
